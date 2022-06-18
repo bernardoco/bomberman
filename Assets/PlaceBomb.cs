@@ -23,7 +23,8 @@ public class PlaceBomb : MonoBehaviour
             offsetY = Mathf.Floor(bombPosition.y / gridSize);
             offsetY = gridSize * offsetY + gridSize/2;         
 
-            Instantiate(Bomb, new Vector3(offsetX, offsetY, 0), transform.rotation);
+            GameObject bomb = Instantiate(Bomb, new Vector3(offsetX, offsetY, transform.position.z), transform.rotation) as GameObject;
+            Destroy(bomb, 3f);
         }
     }
 }

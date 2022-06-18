@@ -8,28 +8,38 @@ public class BombController : MonoBehaviour
     public float gridSize = 0.16f;
     public int explosionLength = 4;
 
-    void Update() {
-        Ray explosionRayUp = new Ray(transform.position, Vector3.up);
-        Ray explosionRayDown = new Ray(transform.position, Vector3.down);
-        Ray explosionRayLeft = new Ray(transform.position, Vector3.left);  
-        Ray explosionRayRight = new Ray(transform.position, Vector3.right);
+    void Start() {
+        GetComponent<SpriteRenderer>().enabled = true;
+        Debug.Log("Bomb Placed");
+        Invoke("Explode", 2f);
+    }
 
-        RaycastHit hitUp;
-        RaycastHit hitDown;
-        RaycastHit hitLeft;
-        RaycastHit hitRight;
+    void Explode() {
+        Debug.Log("Exploded");
+        StartCoroutine(CreateExplosion(Vector2.up));
+        StartCoroutine(CreateExplosion(Vector2.down));
+        StartCoroutine(CreateExplosion(Vector2.left));
+        StartCoroutine(CreateExplosion(Vector2.right));
 
+        GetComponent<SpriteRenderer>().enabled = false;
+    }
+
+    IEnumerator CreateExplosion(Vector2 direction) {
         for (int i = 1; i <= explosionLength; i++) {
-            Physics.Raycast(explosionRayUp, out hitUp, i);
-
-            if (!hitUp.collider) {
-                Instantiate(
+            RaycastHit2D hit = Physics2D.Raycast((Vector2)transform.position, direction, i*gridSize);
+            
+            if (!hit.collider) {               
+                GameObject explosion = Instantiate(
                     explosionObject, 
-                    transform.position + (i * gridSize * Vector3.up), 
-                    transform.rotation);
+                    (Vector2)transform.position + (i * gridSize * direction), 
+                    transform.rotation) as GameObject;
+                Destroy(explosion, 0.8f);
+
             } else {
                 break;
             }
+
+            yield return new WaitForSeconds(0f);
         }
     }
 }
