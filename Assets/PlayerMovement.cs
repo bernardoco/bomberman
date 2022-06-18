@@ -17,8 +17,11 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector2 direction;
 
+    public bool alive;
+
     void Awake() {
         direction = new Vector2(0f, -1f);
+        alive = true;
     }
 
     private void move(Vector2 direction) {
@@ -26,22 +29,27 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void Update() {
-        if (Input.GetKey(Up)) {
-            direction = new Vector2(0f, 1f);
-        } else if (Input.GetKey(Down)) {
-            direction = new Vector2(0f, -1f);
-        } else if (Input.GetKey(Left)) {
-            direction = new Vector2(-1f, 0f);
-        } else if (Input.GetKey(Right)) {
-            direction = new Vector2(1f, 0f);
+        if (alive) {
+            if (Input.GetKey(Up)) {
+                direction = new Vector2(0f, 1f);
+            } else if (Input.GetKey(Down)) {
+                direction = new Vector2(0f, -1f);
+            } else if (Input.GetKey(Left)) {
+                direction = new Vector2(-1f, 0f);
+            } else if (Input.GetKey(Right)) {
+                direction = new Vector2(1f, 0f);
+            } else {
+                direction = new Vector2(0f, 0f);
+            }
+
+            if (direction.x < 0.01) {
+                sr.flipX = true;
+            } else {
+            sr.flipX = false;
+            }
+
         } else {
             direction = new Vector2(0f, 0f);
-        }
-
-        if (direction.x < 0.01) {
-            sr.flipX = true;
-        } else {
-           sr.flipX = false;
         }
 
         animator.SetFloat("Horizontal", direction.x);

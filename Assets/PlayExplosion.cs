@@ -8,6 +8,6 @@ public class PlayExplosion : MonoBehaviour
 
     void Awake() {
         anim = GetComponent<Animator>();
-        anim.Play("ExplosionAnim");
+        anim.Play("Explosion_Animation");
     }
 }
