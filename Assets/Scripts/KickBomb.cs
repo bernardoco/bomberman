@@ -8,6 +8,7 @@ public class KickBomb : MonoBehaviour
 
     private Rigidbody2D rb;
     private Vector2 forceDirection;
+    private Vector2 movementDirection;
 
     void Awake() {
         forceDirection = new Vector2(0f, 0f);
@@ -16,8 +17,15 @@ public class KickBomb : MonoBehaviour
     
 
     void OnTriggerEnter2D(Collider2D collider) {
-        Debug.Log(collider.tag);
-        forceDirection = collider.gameObject.GetComponent<PlayerMovement>().direction;
-        rb.AddForce(forceDirection * force, ForceMode2D.Impulse);
+        if (collider.tag == "Wall") {
+            // Movement Direction
+            movementDirection = GetComponent<Rigidbody2D>().velocity;
+            Debug.Log(movementDirection);
+            rb.AddForce(-movementDirection * force * 2f, ForceMode2D.Impulse);
+        }
+        else {
+            forceDirection = collider.gameObject.GetComponent<PlayerMovement>().direction;
+            rb.AddForce(forceDirection * force, ForceMode2D.Impulse);
+        }
     }
 }
