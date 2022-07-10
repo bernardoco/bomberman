@@ -10,18 +10,21 @@ public class PlayerMovement : MonoBehaviour
     public KeyCode Right = KeyCode.D;
 
     public float movementSpeed = 0.1f;
-
-    public Rigidbody2D rb;
-    public Animator animator;
-    public SpriteRenderer sr;
-
-    private Vector2 direction;
-
+    
+    public Vector2 direction;
     public bool alive;
+
+    private Rigidbody2D rb;
+    private Animator animator;
+    private SpriteRenderer sr;
 
     void Awake() {
         direction = new Vector2(0f, -1f);
         alive = true;
+
+        rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        sr = GetComponent<SpriteRenderer>();
     }
 
     private void move(Vector2 direction) {
@@ -56,6 +59,7 @@ public class PlayerMovement : MonoBehaviour
         animator.SetFloat("Vertical", direction.y);
         animator.SetFloat("Speed", direction.sqrMagnitude);
     }
+
 
     void FixedUpdate() {
         move(direction);

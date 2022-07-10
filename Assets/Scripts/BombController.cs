@@ -10,12 +10,10 @@ public class BombController : MonoBehaviour
 
     void Start() {
         GetComponent<SpriteRenderer>().enabled = true;
-        Debug.Log("Bomb Placed");
         Invoke("Explode", 2f);
     }
 
     void Explode() {
-        Debug.Log("Exploded");
         StartCoroutine(CreateExplosion(Vector2.up));
         StartCoroutine(CreateExplosion(Vector2.down));
         StartCoroutine(CreateExplosion(Vector2.left));
