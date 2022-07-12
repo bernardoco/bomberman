@@ -1458,11 +1458,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 726200594}
-  - component: {fileID: 726200595}
   - component: {fileID: 726200596}
   - component: {fileID: 726200597}
-  - component: {fileID: 726200598}
   - component: {fileID: 726200599}
+  - component: {fileID: 726200595}
+  - component: {fileID: 726200598}
   m_Layer: 0
   m_Name: Bomb
   m_TagString: Bomb
@@ -1601,7 +1601,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 1.46
+  m_Radius: 0.6
 --- !u!1 &776155079
 GameObject:
   m_ObjectHideFlags: 0
@@ -2980,9 +2980,13 @@ MonoBehaviour:
   Down: 115
   Left: 97
   Right: 100
+  Dash: 101
+  dashSpeed: 1.5
+  dashTimeLength: 0.2
   movementSpeed: 0.5
   direction: {x: 0, y: 0}
   alive: 1
+  speed: 0
 --- !u!212 &959743008
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3223,9 +3227,13 @@ MonoBehaviour:
   Down: 274
   Left: 276
   Right: 275
+  Dash: 47
+  dashSpeed: 1.5
+  dashTimeLength: 0.2
   movementSpeed: 0.5
   direction: {x: 0, y: 0}
   alive: 1
+  speed: 0
 --- !u!212 &1013573963
 SpriteRenderer:
   m_ObjectHideFlags: 0
