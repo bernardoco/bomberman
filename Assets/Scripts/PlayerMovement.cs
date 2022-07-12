@@ -10,9 +10,13 @@ public class PlayerMovement : MonoBehaviour
     public KeyCode Right = KeyCode.D;
     public KeyCode Dash = KeyCode.E;
 
+    public float dashCooldown = 4f;
+    private float dashRemainingCooldown = 0f;
+
     public float dashSpeed = 2f;
     public float dashTimeLength = 1f;
     private float dashTimeLeft = 0f;
+    private bool canDash;
 
     public float movementSpeed = 0.5f;
     
@@ -32,6 +36,7 @@ public class PlayerMovement : MonoBehaviour
     void Awake() {
         direction = new Vector2(0f, -1f);
         alive = true;
+        canDash = true;
 
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
@@ -48,10 +53,19 @@ public class PlayerMovement : MonoBehaviour
 
     void Update() {
         if (alive) {
-            if (Input.GetKeyDown(Dash)) {
+            if (Input.GetKeyDown(Dash) && canDash) {
+                canDash = false;
+                dashRemainingCooldown = dashCooldown;
                 dashTimeLeft = dashTimeLength;
                 GameObject d = Instantiate(dashObject, transform.position, transform.rotation) as GameObject;
                 Destroy(d, 0.6f);
+            }
+
+            if (!canDash) {
+                dashRemainingCooldown = dashRemainingCooldown - Time.deltaTime;
+                if (dashRemainingCooldown <= 0) {
+                    canDash = true;
+                }
             }
 
             if (dashTimeLeft <= 0) {
