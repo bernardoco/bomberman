@@ -27,6 +27,8 @@ public class PlayerMovement : MonoBehaviour
 
     public GameObject dashObject;
 
+    public Sprite deadSprite;
+
     void Awake() {
         direction = new Vector2(0f, -1f);
         alive = true;
@@ -74,6 +76,8 @@ public class PlayerMovement : MonoBehaviour
             }
 
         } else {
+            animator.enabled = false;
+            sr.sprite = deadSprite;
             direction = new Vector2(0f, 0f);
         }
 

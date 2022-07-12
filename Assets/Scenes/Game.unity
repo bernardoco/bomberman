@@ -3106,6 +3106,7 @@ MonoBehaviour:
   alive: 1
   speed: 0
   dashObject: {fileID: 951693122}
+  deadSprite: {fileID: 21300000, guid: fa935327285982b41b8807fe86abac1f, type: 3}
 --- !u!212 &959743008
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3354,6 +3355,7 @@ MonoBehaviour:
   alive: 1
   speed: 0
   dashObject: {fileID: 951693122}
+  deadSprite: {fileID: 21300000, guid: fa935327285982b41b8807fe86abac1f, type: 3}
 --- !u!212 &1013573963
 SpriteRenderer:
   m_ObjectHideFlags: 0
