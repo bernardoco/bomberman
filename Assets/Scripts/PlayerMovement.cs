@@ -25,6 +25,8 @@ public class PlayerMovement : MonoBehaviour
     private Animator animator;
     private SpriteRenderer sr;
 
+    public GameObject dashObject;
+
     void Awake() {
         direction = new Vector2(0f, -1f);
         alive = true;
@@ -46,6 +48,8 @@ public class PlayerMovement : MonoBehaviour
         if (alive) {
             if (Input.GetKeyDown(Dash)) {
                 dashTimeLeft = dashTimeLength;
+                GameObject d = Instantiate(dashObject, transform.position, transform.rotation) as GameObject;
+                Destroy(d, 0.6f);
             }
 
             if (dashTimeLeft <= 0) {
