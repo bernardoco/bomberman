@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class BombController : MonoBehaviour
 {
     public GameObject explosionObject;
     public float gridSize = 0.16f;
     public int explosionLength = 4;
+
+    Tilemap tilemap;
 
     void Start() {
         GetComponent<SpriteRenderer>().enabled = true;
@@ -39,6 +42,12 @@ public class BombController : MonoBehaviour
             } else if (hit.collider.tag == "Player") {
                 hit.collider.gameObject.GetComponent<PlayerMovement>().alive = false;
                 
+            } else if (hit.collider.tag == "DestructableWall") {
+                tilemap = hit.collider.gameObject.GetComponent<Tilemap>();
+                Vector3Int tileCell = tilemap.WorldToCell(hit.point + direction*gridSize/2);
+                tilemap.SetTile(tileCell, null);
+                break;
+
             } else {
                 break;
             }

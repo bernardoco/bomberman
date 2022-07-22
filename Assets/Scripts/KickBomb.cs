@@ -27,7 +27,7 @@ public class KickBomb : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D collider) {
-        if (collider.tag == "Wall") {
+        if (collider.tag == "Wall" || collider.tag == "DestructableWall") {
             movementDirection = GetComponent<Rigidbody2D>().velocity;
             rb.AddForce(-movementDirection * force * 2f, ForceMode2D.Impulse);
         }
